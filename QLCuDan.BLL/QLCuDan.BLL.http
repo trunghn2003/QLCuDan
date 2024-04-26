@@ -1,0 +1,6 @@
+@QLCuDan.BLL_HostAddress = http://localhost:5282
+
+GET {{QLCuDan.BLL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
