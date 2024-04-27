@@ -2,9 +2,7 @@
 using QLCuDan.BLL.Dto;
 using QLCuDan.DAL.Model;
 using QLCuDan.DAL.Repositories;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 public class CitizenService : ICitizenService
 {
