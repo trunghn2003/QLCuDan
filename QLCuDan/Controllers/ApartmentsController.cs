@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 using QLCuDan.BLL.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ public class ApartmentsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ApartmentDto>>> GetApartments()
     {
-        return Ok(await _apartmentService.GetAllApartmentsAsync());
+        var result = await _apartmentService.GetAllApartmentsAsync();
+        return result;
     }
 
     [HttpGet("{id}")]
@@ -34,7 +36,7 @@ public class ApartmentsController : ControllerBase
     public async Task<ActionResult<ApartmentDto>> PostApartment(ApartmentDto apartmentDto)
     {
         var newApartment = await _apartmentService.CreateApartmentAsync(apartmentDto);
-        return CreatedAtAction(nameof(GetApartment), new { id = newApartment.ApartmentID }, newApartment);
+        return CreatedAtAction(nameof(GetApartment), new { id = newApartment.Id }, newApartment);
     }
 
     [HttpPut("{id}")]

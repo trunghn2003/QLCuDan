@@ -19,7 +19,7 @@ public class ApartmentService : IApartmentService
         var apartments = await _unitOfWork.ApartmentRepository.GetAllAsync();
         return apartments.Select(a => new ApartmentDto
         {
-            ApartmentID = a.Id,
+            Id = a.Id,
             UnitNumber = a.UnitNumber,
             Floor = a.Floor,
             Size = a.Size
@@ -33,7 +33,7 @@ public class ApartmentService : IApartmentService
             return null;
         return new ApartmentDto
         {
-            ApartmentID = apartment.Id,
+            Id = apartment.Id,
             UnitNumber = apartment.UnitNumber,
             Floor = apartment.Floor,
             Size = apartment.Size
@@ -48,8 +48,8 @@ public class ApartmentService : IApartmentService
             Floor = apartmentDto.Floor,
             Size = apartmentDto.Size
         };
-        //await _unitOfWork.ApartmentRepository.Add(apartment);
-        apartmentDto.ApartmentID = apartment.Id;
+        apartmentDto.Id = apartment.Id;
+        await _unitOfWork.ApartmentRepository.AddAsync(apartment);
         return apartmentDto;
     }
 
@@ -62,7 +62,7 @@ public class ApartmentService : IApartmentService
         apartment.UnitNumber = apartmentDto.UnitNumber;
         apartment.Floor = apartmentDto.Floor;
         apartment.Size = apartmentDto.Size;
-        //await _unitOfWork.ApartmentRepository.Update(apartment);
+        await _unitOfWork.ApartmentRepository.UpdateAsync(apartment);
         return true;
     }
 
@@ -72,7 +72,7 @@ public class ApartmentService : IApartmentService
         if (apartment == null)
             return false;
 
-        //await _unitOfWork.ApartmentRepository.DeleteAsync(apartment);
+        await _unitOfWork.ApartmentRepository.DeleteAsync(apartment);
         return true;
     }
 }
